@@ -1,47 +1,72 @@
 class Producto {
-    constructor(nombre, precio, material, codigo) {
+    constructor(nombre, categoria, precio, material, codigo) {
         this.nombre  = nombre.toUpperCase();
+        this.categoria = categoria;
         this.precio  = parseFloat(precio);
         this.material = material;
         this.codigo = codigo;
         this.vendido = false;
     }
     cotizar() {
-        alert ("EL VALOR DEL PRODUCTO ES " + this.precio * 1.21);
+        alert ("EL VALOR DEL PRODUCTO ES " + this.precio);
     }
     vender() {
         this.vendido = true;
     }
 }
-const alianza = new Producto("alianza", 3000, "plata 925", "A");
-const alianzaOro = new Producto("alianza oro", 12000, "oro", "AO");
-const arosAbridor = new Producto("aros abridor", 1800, "plata", "AA");
-const arosAbridorOro = new Producto("aros abridor", 4500, "oro", "AAO");
+const ethereadel = new Producto("Ethereadel", "rings", 10000, "plata 925", "eth");
+const amaroked = new Producto("Amaroked", "earrings", 15000, "plata 925", "amk");
+const antogesi = new Producto("Antongesi", "necklaces", 25000, "plata 925", "atg");
+const scapelans = new Producto("Scapelans", "", 20000, "oro", "scp");
 
 
-var codigo = prompt ("Ingrese el codigo del Producto que desea comprar (A: alianzas, AO: alianzas de oro, AA: aros abridor, AAO: aros abridor de oro")
+const carrito = []
 
-while (codigo != "salir")
-{  
-    switch (codigo) {
-    case alianza.codigo:
-        alianza.cotizar()
-        codigo = "salir"
+var agregarProducto = () => {
+    var productoElegido = prompt ("Ingrese el codigo del Producto que desea comprar (eth: Ethereadel, amk: Amaroked, atg: Antongesi, scp: Scapelans").toLowerCase()
+
+    while (productoElegido != "salir")
+    {  
+        switch (productoElegido) {
+        case ethereadel.codigo:
+            ethereadel.cotizar()
+            carrito.push(ethereadel)
+            productoElegido = "salir"
+            break
+        case amaroked.codigo:
+            amaroked.cotizar()
+            carrito.push(amaroked)
+            productoElegido = "salir";
+            break
+        case antogesi.codigo:
+            antogesi.cotizar()
+            carrito.push(antogesi)
+            productoElegido = "salir";
+            break
+        case scapelans.codigo:
+            scapelans.cotizar()
+            carrito.push(scapelans)
+            productoElegido = "salir";
         break
-    case alianzaOro.codigo:
-        alianzaOro.cotizar()
-        codigo = "salir";
-        break
-    case arosAbridor.codigo:
-        arosAbridor.cotizar()
-        codigo = "salir";
-        break
-    case arosAbridorOro.codigo:
-        arosAbridorOro.cotizar()
-        codigo = "salir";
-    break
-    default:
-        codigo = prompt ("Ingrese nuevamente el codigo del Producto que desea comprar (A: alianzas, AO: alianzas de oro, AA: aros abridor, AAO: aros abridor de oro")
+        default:
+            productoElegido = prompt ("Ingrese nuevamente el codigo del Producto que desea comprar (Eth: Ethereadel, Amk: Amaroked, Atg: Antongesi,  Scp: Scapelans")
+        }
     }
+    if (confirm ("Desea agregar otro producto a la compra?")) 
+{
+agregarProducto ();
 }
+else {alert ("Finalizó su compra, su total es de $ " + totalcarrito())}
+}
+
+const totalcarrito = () => {
+  let sumaTotal  = 0;
+  carrito.forEach((producto) => {
+    sumaTotal +=   producto.precio
+  })
+  return sumaTotal
+}
+
+agregarProducto()
+console.log(carrito)
 
