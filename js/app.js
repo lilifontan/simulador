@@ -1,3 +1,4 @@
+// DECLARO CONSTRUCTOR PARA PRODUCTO
 class Producto {
     constructor(nombre, categoria, precio, material, codigo) {
         this.nombre  = nombre.toUpperCase();
@@ -14,14 +15,17 @@ class Producto {
         this.vendido = true;
     }
 }
-const ethereadel = new Producto("Ethereadel", "rings", 10000, "plata 925", "eth");
-const amaroked = new Producto("Amaroked", "earrings", 15000, "plata 925", "amk");
-const antogesi = new Producto("Antongesi", "necklaces", 25000, "plata 925", "atg");
+
+// DECLARO OBJETOS DE LA CLASE PRODUCTO
+const ethereadel = new Producto("Ethereadel", "rings", 5000, "plata 925", "eth");
+const amaroked = new Producto("Amaroked", "earrings", 10000, "plata 925", "amk");
+const antogesi = new Producto("Antongesi", "necklaces", 15000, "plata 925", "atg");
 const scapelans = new Producto("Scapelans", "", 20000, "oro", "scp");
 
-
+//ARRAY CON MIS PRODUCTOS
 const carrito = []
 
+//FUNCIÓN QUE AGREGA AL ARRAY PRODUCTOS ELEGIDOS POR EL USUARIO
 var agregarProducto = () => {
     var productoElegido = prompt ("Ingrese el codigo del Producto que desea comprar (eth: Ethereadel, amk: Amaroked, atg: Antongesi, scp: Scapelans").toLowerCase()
 
@@ -49,16 +53,35 @@ var agregarProducto = () => {
             productoElegido = "salir";
         break
         default:
-            productoElegido = prompt ("Ingrese nuevamente el codigo del Producto que desea comprar (Eth: Ethereadel, Amk: Amaroked, Atg: Antongesi,  Scp: Scapelans")
+            productoElegido = prompt ("Ingrese nuevamente el codigo del Producto que desea comprar (eth: Ethereadel, amk: Amaroked, atg: Antongesi,  scp: Scapelans")
         }
     }
     if (confirm ("Desea agregar otro producto a la compra?")) 
 {
 agregarProducto ();
 }
-else {alert ("Finalizó su compra, su total es de $ " + totalcarrito())}
+else {alert ("Su total es de $ " + totalcarrito())
+
+}
 }
 
+//FUNCION QUE ELIMINA UN PRODUCTO DEL CARRITO
+var eliminarProducto = () => {
+    productoEliminar = prompt ("Si desea eliminaar un producto del carrito, ingrese el codigo (eth: Ethereadel, amk: Amaroked, atg: Antongesi,  scp: Scapelans").toLowerCase()
+   
+var num =0;
+carrito.forEach((producto) => { 
+    
+    if (producto.codigo == productoEliminar){
+        console.log ("producto.código "+ producto.codigo + "productoEliminar " + productoEliminar + "num "+ num);
+        carrito.splice(num,1);
+        num +=1; }
+        else {num +=1;}
+  })
+
+}
+
+//FUNCION QUE OBTIENE TOTAL A PAGAR DEL CARRITO
 const totalcarrito = () => {
   let sumaTotal  = 0;
   carrito.forEach((producto) => {
@@ -67,6 +90,11 @@ const totalcarrito = () => {
   return sumaTotal
 }
 
+//MAIN
 agregarProducto()
-console.log(carrito)
+
+alert ("Procesaremos la compra, confirme si quiere todos los productos");
+eliminarProducto()
+alert ("Su total actualizado es de $ " + totalcarrito() + ", procesaremos la compra")
+
 
